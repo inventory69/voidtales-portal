@@ -43,7 +43,9 @@ const loading = ref(true)
 const error = ref('')
 const meta = ref({ site: '', title: '', target: '' })
 const countdown = ref(4)
-let timer = null
+let intervalId = null
+let timeoutId = null
+let redirected = false
 
 async function fetchMeta() {
   try {
@@ -57,15 +59,24 @@ async function fetchMeta() {
 }
 
 function startCountdown() {
-  timer = setInterval(() => {
-    countdown.value--
-    if (countdown.value <= 0) goNow()
+  clearTimer()
+  intervalId = setInterval(() => {
+    if (countdown.value > 0) countdown.value--
   }, 1000)
+  timeoutId = setTimeout(goNow, countdown.value * 1000)
 }
 
-function clearTimer(){ if (timer) clearInterval(timer) }
+function clearTimer(){
+  if (intervalId) { clearInterval(intervalId); intervalId = null }
+  if (timeoutId) { clearTimeout(timeoutId); timeoutId = null }
+}
 
-function goNow() { clearTimer(); window.location.href = `/api/goto/${site}` }
+function goNow() {
+  if (redirected) return
+  redirected = true
+  clearTimer()
+  window.location.href = `/api/goto/${site}`
+}
 function cancel(){ clearTimer(); router.push('/') }
 
 onMounted(fetchMeta)
