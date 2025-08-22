@@ -25,3 +25,5 @@ logs
 
 # macOS-specific files
 .DS_Store
+
+ecosystem.config.cjs
