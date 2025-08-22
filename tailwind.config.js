@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: { primary: '#595bca' },
-      fontFamily: { serif: ['Cinzel', 'serif'] }
+      fontFamily: { serif: ['Cinzel Decorative', 'serif'] }
     }
   },
   plugins: []

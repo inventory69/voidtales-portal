@@ -1,168 +1,153 @@
-# VoidTales — Portal Hub
+# ✨ VoidTales — Portal Hub
 
 A stylish Nuxt 3 portal that centralizes links to your project subdomains (forum, blog, wiki, Discord).  
 Includes an emblem SVG, animated portal cards, an interstitial redirect page with countdown, and a secure server-side redirect API (no open-redirects).
 
-Repository: git@github.com:inventory69/voidtales-portal.git
+[![Nuxt 3](https://img.shields.io/badge/Nuxt-3-green?logo=nuxt.js)](https://nuxt.com/docs)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-blue?logo=tailwindcss)](https://tailwindcss.com/docs/installation)
 
 ---
 
-## Features
+## 📚 Table of Contents
 
-- Nuxt 3 + Tailwind CSS (SSR-ready)  
-- Emblem SVG in `public/svg/voidtales.svg`  
-- Interstitial redirect page `/goto/:site` with countdown and animation  
-- Server endpoints:
-    - `GET /api/lookup/:site` → returns `{ site, title, target }`
-    - `GET /api/goto/:site` → server-side validated 302 redirect (mapping in runtimeConfig)
-- Accessibility: focus-visible, keyboard navigation, prefers-reduced-motion support  
-- Easy to extend: PWA, OG image generation, particle backgrounds
-
----
-
-## Prerequisites
-
-- Node.js 18+ (LTS recommended)  
-- Git
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [Configure Portal Targets](#configure-portal-targets)
+- [Project Structure](#project-structure)
+- [Editor & Tailwind Tips](#editor--tailwind-tips)
+- [Troubleshooting](#common-troubleshooting)
+- [Build & Deploy](#build--deploy)
+- [Contributing](#contributing)
+- [Useful Links](#useful-links)
 
 ---
 
-## Quick start (local)
+## 🚀 Features
 
-Clone, install and run the dev server:
-
-    git clone git@github.com:inventory69/voidtales-portal.git
-    cd voidtales-portal
-
-    npm install
-
-    npm run dev
-
-Open http://localhost:3000 in your browser.
+- **Nuxt 3 + Tailwind CSS** (SSR-ready)
+- **Emblem SVG** in `public/svg/voidtales.svg`
+- **Animated portal cards** & interstitial redirect page `/goto/:site` with countdown
+- **Secure server endpoints**:
+  - `GET /api/lookup/:site` → returns `{ site, title, target }`
+  - `GET /api/goto/:site` → server-side validated 302 redirect (mapping in runtimeConfig)
+- **Accessibility**: focus-visible, keyboard navigation, prefers-reduced-motion
+- **Easy to extend**: PWA, OG image generation, particle backgrounds
 
 ---
 
-## Configure portal targets
+## ⚡ Prerequisites
 
-Edit `runtimeConfig.public.portalTargets` in `nuxt.config.ts` to set where each portal key points. Example:
+- [Node.js 18+](https://nodejs.org/) (LTS recommended)  
+- [Git](https://git-scm.com/)  
+- [Bun](https://bun.sh/) (optional, supported)
 
-    runtimeConfig: {
-      public: {
-        portalTargets: {
-          forum: 'https://forum.voidtales.win',
-          blog:  'https://blog.voidtales.win',
-          wiki:  'https://wiki.voidtales.win',
-          discord: 'https://discord.voidtales.win'
-        }
-      }
+---
+
+## 🏁 Quick Start
+
+```sh
+git clone git@github.com:inventory69/voidtales-portal.git
+cd voidtales-portal
+
+npm install      # or bun install
+npm run dev      # or bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🎯 Configure Portal Targets
+
+Edit `runtimeConfig.public.portalTargets` in [`nuxt.config.ts`](nuxt.config.ts) to set where each portal key points:
+
+```ts
+runtimeConfig: {
+  public: {
+    portalTargets: {
+      forum:   'https://forum.voidtales.win',
+      blog:    'https://blog.voidtales.win',
+      wiki:    'https://wiki.voidtales.win',
+      discord: 'https://discord.voidtales.win'
     }
+  }
+}
+```
 
-Only keys listed here are allowed — this prevents open-redirect vulnerabilities.
-
----
-
-## Project structure (key files)
-
-- `nuxt.config.ts` — configuration & runtime mapping  
-- `app.vue` — global wrapper / CSS import  
-- `assets/css/main.css` — Tailwind directives + custom styles  
-- `public/svg/voidtales.svg` — site emblem  
-- `components/` — Logo, Hero, PortalCard, ThemeToggle, etc.  
-- `pages/index.vue` — landing page  
-- `pages/goto/[site].vue` — interstitial redirect page (countdown)  
-- `server/api/lookup/[site].ts` — returns `target` JSON  
-- `server/api/goto/[site].ts` — server-side 302 redirect (validates key)
+> **Only keys listed here are allowed** — this prevents open-redirect vulnerabilities.
 
 ---
 
-## SVG / Image handling
+## 🗂️ Project Structure
 
-Place the final emblem at `public/svg/voidtales.svg`.
-
-Optional conversion to PNG/WebP with ImageMagick:
-
-    magick convert -background transparent -density 300 public/svg/voidtales.svg \
-      -resize 2048x2048 -fuzz 3% -trim +repage public/voidtales-2048.png
-
-    magick convert public/voidtales-2048.png -quality 90 public/voidtales-2048.webp
-
-To avoid font dependencies in SVG, convert text to paths (Inkscape or Illustrator).
+```
+nuxt.config.ts              # Configuration & runtime mapping
+app.vue                     # Global wrapper / CSS import
+assets/css/main.css         # Tailwind directives + custom styles
+public/svg/voidtales.svg    # Site emblem
+components/                 # Logo, Hero, PortalCard, ThemeToggle, etc.
+pages/index.vue             # Landing page
+pages/goto/[site].vue       # Interstitial redirect page (countdown)
+server/api/lookup/[site].ts # Returns target JSON
+server/api/goto/[site].ts   # Server-side 302 redirect (validates key)
+```
 
 ---
 
-## Editor & Tailwind tips
+## 🛠️ Editor & Tailwind Tips
 
 If your editor flags `@tailwind` rules as unknown:
 
-- Install the "Tailwind CSS IntelliSense" extension (recommended), and/or
-- Add `.vscode/settings.json` with:
+- Install the **Tailwind CSS IntelliSense** extension (recommended)
+- Or add `.vscode/settings.json`:
 
-    {
-      "css.lint.unknownAtRules": "ignore",
-      "scss.lint.unknownAtRules": "ignore",
-      "less.lint.unknownAtRules": "ignore"
-    }
+  ```json
+  {
+    "css.lint.unknownAtRules": "ignore",
+    "scss.lint.unknownAtRules": "ignore",
+    "less.lint.unknownAtRules": "ignore"
+  }
+  ```
 
-These are editor-only warnings — the build (PostCSS + Tailwind) handles `@tailwind` directives.
-
----
-
-## Common troubleshooting
-
-- "defineNuxtConfig is not a function" → ensure `import { defineNuxtConfig } from 'nuxt/config'` and Nuxt 3 is installed.  
-- h3 / `useRuntimeConfig` errors → use Nuxt auto-imports (`#imports`) or explicit imports from `h3` where appropriate.  
-- Vue SFC parse errors with stray backslashes before template literals (e.g. `\${`) → remove stray backslashes so template literals are valid inside JS bindings.  
-- Duplicate portal buttons → ensure only `Hero` renders the grid (avoid duplicating the same UI in `index.vue`).  
-- If styles look wrong, check that `assets/css/main.css` is loaded via the `css` array in `nuxt.config.ts` or imported in `app.vue`.
+> These are editor-only warnings — the build (PostCSS + Tailwind) handles `@tailwind` directives.
 
 ---
 
-## Git: rename `master` → `main` (if needed)
+## 🧩 Common Troubleshooting
 
-If your repository started on `master` and you want `main`:
-
-    # rename local branch
-    git branch -M main
-    git push -u origin main
-
-Then on GitHub: change the repository default branch to `main` in Settings → Branches. Optionally remove the old `master`:
-
-    git push origin --delete master
+- **"defineNuxtConfig is not a function"**  
+  → Ensure `import { defineNuxtConfig } from 'nuxt/config'` and Nuxt 3 is installed.
+- **h3 / `useRuntimeConfig` errors**  
+  → Use Nuxt auto-imports (`#imports`) or explicit imports from `h3`.
+- **Vue SFC parse errors with stray backslashes**  
+  → Remove stray backslashes before template literals inside JS bindings.
+- **Duplicate portal buttons**  
+  → Ensure only `Hero` renders the grid (avoid duplicating UI in `index.vue`).
+- **Styles look wrong**  
+  → Check that `assets/css/main.css` is loaded via the `css` array in `nuxt.config.ts` or imported in `app.vue`.
 
 ---
 
-## Build & deploy (to add later)
+## 📦 Build & Deploy
 
 When you're ready for production:
 
-    npm run build
-    npm run start
-
-Recommended host: Vercel (works well with Nuxt Nitro). Set build command to `npm run build` and output directory to `.output`.
+```sh
+npm run build      # or bun build
+npm run start      # or bun start
+```
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-- Fork → branch → PR  
-- Use descriptive branch names: `feature/...`, `fix/...`, `chore/...`  
+- Fork → branch → PR
+- Use descriptive branch names: `feature/...`, `fix/...`, `chore/...`
 - Test locally: `npm run dev` and `npm run build` before opening a PR
 
 ---
 
-## License
-
-Add a license file (suggested: MIT). Example `LICENSE` header:
-
-    MIT License
-
-    © [Year] inventory69
-
----
-
-## Useful links
-
-- Nuxt 3 docs: https://nuxt.com/docs  
-- Tailwind CSS: https://tailwindcss.com/docs/installation  
-- ImageMagick: https://imagemagick.org/  
-- Inkscape: https://inkscape.org/
+- [Nuxt 3 docs](https://nuxt.com/docs)
+- [Tailwind CSS](https://tailwindcss.com/docs/installation)
+- [ImageMagick](https://imagemagick.org/)

@@ -6,10 +6,9 @@ export default defineEventHandler((event) => {
   const mapping = config.public.portalTargets as Record<string, string>
 
   const site = String(event.context.params?.site ?? '')
-  if (!Object.prototype.hasOwnProperty.call(mapping, site)) {
+  const target = mapping[site]
+  if (target === undefined) {
     throw createError({ statusCode: 404, statusMessage: 'Unknown portal' })
   }
-
-  const target = mapping[site]
   return sendRedirect(event, target, 302)
 })

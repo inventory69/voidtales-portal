@@ -10,18 +10,34 @@
   --muted: #cfcff0;
   --glass: rgba(255,255,255,0.04);
   --glow: rgba(0,229,255,0.10);
+  --fg: #e9ecff; /* text */
+}
+
+/* Light theme tokens */
+:root.light{
+  --bg-0: #f7f8ff;
+  --bg-1: #ffffff;
+  --accent: #3b3ee3;
+  --muted: #4b4e73;
+  --glass: rgba(0,0,0,0.06);
+  --glow: rgba(59,62,227,0.10);
+  --fg: #121328;
 }
 
 /* Global base */
 html,body,#app { height:100%; margin:0; }
 body{
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  color: #e9ecff;
+  color: var(--fg);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 
-  /* fixed: use direct gradient (no @apply with var()) */
   background: radial-gradient(ellipse at top, #0a0519 0%, #03010a 60%);
+}
+
+/* Light background */
+:root.light body{
+  background: radial-gradient(ellipse at top, #ffffff 0%, #eef0ff 60%);
 }
 
 /* Container */
@@ -55,10 +71,10 @@ body{
 
 /* Title */
 .h-title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Cinzel Decorative', serif;
   font-size: clamp(36px, 6vw, 56px);
   line-height: 1.02;
-  color: #fff;
+  color: var(--fg);
   text-shadow: 0 6px 28px rgba(89,91,202,0.10);
 }
 .h-sub { color: var(--muted); margin-top: 10px; font-size: 1rem; }
