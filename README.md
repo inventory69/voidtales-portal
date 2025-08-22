@@ -160,15 +160,6 @@ Add a license file (suggested: MIT). Example `LICENSE` header:
 
 ---
 
-## Next steps I can help with
-
-- Add production deployment / CI (Vercel, GitHub Actions)  
-- Add PWA & OG image generation  
-- Improve interstitial animation (GSAP / three.js / tsParticles)  
-- Optimize SVG and produce favicon variants
-
----
-
 ## Useful links
 
 - Nuxt 3 docs: https://nuxt.com/docs  
