@@ -20,3 +20,21 @@ logs
 .env
 .env.*
 !.env.example
+=======
+# build output
+.output/
+
+# nuxt folder
+.nuxt
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# macOS-specific files
+.DS_Store

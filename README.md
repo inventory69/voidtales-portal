@@ -148,8 +148,6 @@ npm run start      # or bun start
 
 ---
 
-## 🔗 Useful Links
-
 - [Nuxt 3 docs](https://nuxt.com/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs/installation)
 - [ImageMagick](https://imagemagick.org/)
