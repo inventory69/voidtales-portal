@@ -22,7 +22,7 @@ Repository: git@github.com:inventory69/voidtales-portal.git
 
 ## Prerequisites
 
-- Node.js 18+ (LTS recommended)  
+- Node.js 18+ (LTS recommended) (Bun is supported)
 - Git
 
 ---
@@ -34,9 +34,9 @@ Clone, install and run the dev server:
     git clone git@github.com:inventory69/voidtales-portal.git
     cd voidtales-portal
 
-    npm install
+    npm install / bun install
 
-    npm run dev
+    npm run dev / bun dev
 
 Open http://localhost:3000 in your browser.
 
