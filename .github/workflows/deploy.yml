@@ -44,5 +44,14 @@ jobs:
         working-directory: './voidtales-portal'
 
       - name: 🔨 Start Nuxt Project
-        run: pm2 start ecosystem.config.cjs
-        working-directory: './voidtales-portal'
+        id: 'laststep'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.DIFFUSER_USERNAME }}
+          key: ${{ secrets.DIFFUSER_SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /home/blogadmin/voidtales-portal
+            pm2 start ecosystem.config.cjs
+            echo "✅ Deployment erfolgreich abgeschlossen."
