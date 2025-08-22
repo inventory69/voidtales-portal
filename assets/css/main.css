@@ -55,7 +55,7 @@ body{
 
 /* Title */
 .h-title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Cinzel Decorative', serif;
   font-size: clamp(36px, 6vw, 56px);
   line-height: 1.02;
   color: #fff;
