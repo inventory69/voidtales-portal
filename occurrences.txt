@@ -1,0 +1,2 @@
+./components/Hero.vue:20:          :href="`/goto/${p.id}`"
+./components/Hero.vue:21:          :label="`Open ${p.title}`"

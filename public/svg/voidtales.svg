@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" width="2048" height="2048" role="img" aria-label="VoidTales Emblem">
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#7a7de6"/>
+      <stop offset="1" stop-color="#595bca"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="none"/>
+  <g transform="translate(1024,1024)">
+    <circle r="380" fill="url(#g)" opacity="0.14"/>
+    <path d="M0,-260 L80,-120 L200,-80 L80,0 L0,40 L-80,0 L-200,-80 L-80,-120 Z" fill="#fff" opacity="0.06"/>
+    <circle r="120" fill="#00e5ff" opacity="0.12"/>
+  </g>
+</svg>
